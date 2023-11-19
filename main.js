@@ -22,7 +22,7 @@
           row.forEach(cell => {
             const cellDiv = document.createElement('div');
             cellDiv.className = 'cell';
-            // Add styles or classes based on cell properties
+            
             rowDiv.appendChild(cellDiv);
           });
           gridContainer.appendChild(rowDiv);
