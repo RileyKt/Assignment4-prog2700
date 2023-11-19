@@ -1,25 +1,38 @@
 // IIFE
 (() => {
 
-	//Choose an array method to implement for each of the incomplete functions.
-	//FOR/WHILE LOOPS OF ANY KIND ARE FORBIDDEN! You must use the available array functions to accomplish your goal.
-
-	//Remember, you can chain together array function calls to attain your goals.
-	// Ex: array.filter().map()
-
-	//Get data for the TV Show "Friends"
+	
 	fetch('https://prog2700.onrender.com/threeinarow/random')
     .then((response) => response.json())
     .then((json) => {
-
+        console.log(json);
+        createGrid(json);
+        
     })
     .catch(error =>{
         console.error("Error fetching json data: ", error);
     });
-    
+    function createGrid(data) {
+        const gridContainer = document.createElement('div');
+        gridContainer.className = 'grid';
+      
+        data.rows.forEach(row => {
+          const rowDiv = document.createElement('div');
+          rowDiv.className = 'row';
+          row.forEach(cell => {
+            const cellDiv = document.createElement('div');
+            cellDiv.className = 'cell';
+            // Add styles or classes based on cell properties
+            rowDiv.appendChild(cellDiv);
+          });
+          gridContainer.appendChild(rowDiv);
+        });
+      
+        document.body.appendChild(gridContainer);
+      }
+
 
     
-
 
 
 
