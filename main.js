@@ -15,21 +15,24 @@
     function createGrid(data) {
         const gridContainer = document.createElement('div');
         gridContainer.className = 'grid';
-      
-        data.rows.forEach(row => {
-          const rowDiv = document.createElement('div');
-          rowDiv.className = 'row';
-          row.forEach(cell => {
-            const cellDiv = document.createElement('div');
-            cellDiv.className = 'cell';
-            
-            rowDiv.appendChild(cellDiv);
-          });
-          gridContainer.appendChild(rowDiv);
+
+
+        data.rows.forEach((row, rowIndex) => {
+            const rowDiv = document.createElement('div');
+            rowDiv.className = 'row';
+            row.forEach((cell, cellIndex) => {
+                const cellDiv = document.createElement('div');
+                cellDiv.className = `cell state-${cell.currentState}`;
+                cellDiv.addEventListener('click', () => toggleCellState(cell, cellDiv));
+                rowDiv.appendChild(cellDiv);
+            });
+
+            gridContainer.appendChild(rowDiv);
         });
       
         document.body.appendChild(gridContainer);
       }
+      
 
 
     

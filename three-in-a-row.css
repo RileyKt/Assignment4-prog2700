@@ -10,3 +10,22 @@
     border: 1px solid black;
     
   }
+  .cell {
+    /* Common styles for all cells */
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.state-0 {
+    background-color: white;
+}
+
+.state-1 {
+    background-color: blue;
+}
+
+.state-2 {
+    background-color: green;
+}
