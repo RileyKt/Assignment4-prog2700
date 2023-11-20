@@ -33,7 +33,13 @@
         document.body.appendChild(gridContainer);
       }
       
+      function toggleCellState(cell, cellDiv) {
+        // Increment the state and wrap around after state 2
+        cell.currentState = (cell.currentState + 1) % 3;
 
+        // Update the cell's class to reflect the new state
+        cellDiv.className = `cell state-${cell.currentState}`;
+    }
 
     
 
