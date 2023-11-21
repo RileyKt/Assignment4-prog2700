@@ -75,6 +75,7 @@
             }
         }
     
+        //if statements to output to user if they have done the puzzle correctly, so far so good, or if they've gone wrong
         if (isComplete && isCorrect) {
             alert("You did it!!");
         } else if (!isCorrect) {
@@ -84,6 +85,7 @@
         }
     }
 
+    //creates the button to highlight incorrect cells
     function createHighlightCheckbox() {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -91,9 +93,11 @@
         checkbox.addEventListener('change', (event) => highlightIncorrect(event.target.checked));
         document.body.appendChild(checkbox);
     }
+    //function to highlight incorrect cells with a red outline
     function highlightIncorrect(isChecked) {
         let rows = puzzleData.rows;
     
+        //nested for loop to check each cell for if its correct or not, and changes it so that it has the css property to give it a red outline
         for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
             for (let cellIndex = 0; cellIndex < rows[rowIndex].length; cellIndex++) {
                 const cell = rows[rowIndex][cellIndex];
@@ -114,8 +118,19 @@
         answerButton.addEventListener('click', showAnswer);
         document.body.appendChild(answerButton);
     }
+
+    //function to show the correct answer for the puzzle
     function showAnswer(){
-        
+        let rows = puzzleData.rows;
+
+        //nested for loop to show the correct color for each cell in the puzzle
+        for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
+            for (let cellIndex = 0; cellIndex < rows[rowIndex].length; cellIndex++) {
+                const cell = rows[rowIndex][cellIndex];
+                const cellDiv = document.querySelector(`.cell[data-row="${rowIndex}"][data-cell="${cellIndex}"]`);
+                cellDiv.className = `cell state-${cell.correctState}`;
+            }
+        }
     }
 
 
