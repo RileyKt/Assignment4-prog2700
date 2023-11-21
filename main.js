@@ -9,6 +9,7 @@
         puzzleData = json;
         createGrid(json);
         createStatusCheckButton();
+        createHighlightCheckbox();
     })
     .catch(error =>{
         console.error("Error fetching json data: ", error);
@@ -26,7 +27,10 @@
             rowDiv.className = 'row';
             row.forEach((cell, cellIndex) => {
                 const cellDiv = document.createElement('div');
+                //
                 cellDiv.className = `cell state-${cell.currentState}`;
+                cellDiv.dataset.row = rowIndex;  
+                cellDiv.dataset.cell = cellIndex; 
                 cellDiv.addEventListener('click', () => toggleCellState(cell, cellDiv));
                 rowDiv.appendChild(cellDiv);
             });
@@ -78,6 +82,29 @@
         }
     }
 
+    function createHighlightCheckbox() {
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = 'highlightCheckbox';
+        checkbox.addEventListener('change', (event) => highlightIncorrect(event.target.checked));
+        document.body.appendChild(checkbox);
+    }
+    function highlightIncorrect(isChecked) {
+        let rows = puzzleData.rows;
+    
+        for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
+            for (let cellIndex = 0; cellIndex < rows[rowIndex].length; cellIndex++) {
+                const cell = rows[rowIndex][cellIndex];
+                const cellDiv = document.querySelector(`.cell[data-row="${rowIndex}"][data-cell="${cellIndex}"]`);
+    
+                if (isChecked && cell.canToggle && cell.currentState !== cell.correctState) {
+                    cellDiv.classList.add('incorrect');
+                } else {
+                    cellDiv.classList.remove('incorrect');
+                }
+            }
+        }
+    }
 
 
 })();

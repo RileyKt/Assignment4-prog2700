@@ -29,3 +29,6 @@
 .state-2 {
     background-color: green;
 }
+.cell.incorrect {
+  border: 1px solid red; /* Adds a solid red border */
+}
