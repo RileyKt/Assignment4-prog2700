@@ -1,11 +1,12 @@
 // IIFE
 (() => {
-
+    let puzzleData;
 	
 	fetch('https://prog2700.onrender.com/threeinarow/random')
     .then((response) => response.json())
     .then((json) => {
         console.log(json);
+        puzzleData = json;
         createGrid(json);
         createStatusCheckButton();
     })
@@ -52,8 +53,29 @@
         document.body.appendChild(button);
     }
 
+    //function for puzzle logic and reporting to user if they did it correctly
     function checkPuzzleStatus() {
-        return;
+        let isComplete = true;
+        let isCorrect = true;
+        let rows = puzzleData.rows;
+    
+        for (const row of rows) {
+            for (const cell of row) {
+                if (cell.currentState === 0) {
+                    isComplete = false;
+                } else if (cell.canToggle && cell.currentState !== cell.correctState) {
+                    isCorrect = false;
+                }
+            }
+        }
+    
+        if (isComplete && isCorrect) {
+            alert("You did it!!");
+        } else if (!isCorrect) {
+            alert("Something is wrong");
+        } else {
+            alert("So far so good");
+        }
     }
 
 
