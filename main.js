@@ -10,6 +10,7 @@
         createGrid(json);
         createStatusCheckButton();
         createHighlightCheckbox();
+        createAnswerButton();
     })
     .catch(error =>{
         console.error("Error fetching json data: ", error);
@@ -27,8 +28,9 @@
             rowDiv.className = 'row';
             row.forEach((cell, cellIndex) => {
                 const cellDiv = document.createElement('div');
-                //
                 cellDiv.className = `cell state-${cell.currentState}`;
+
+                //https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
                 cellDiv.dataset.row = rowIndex;  
                 cellDiv.dataset.cell = cellIndex; 
                 cellDiv.addEventListener('click', () => toggleCellState(cell, cellDiv));
@@ -104,6 +106,16 @@
                 }
             }
         }
+    }
+    //function for additional functionallity of a button to show the correct answer for the puzzle
+    function createAnswerButton() {
+        const answerButton = document.createElement('button');
+        answerButton.textContent = 'Show Answer';
+        answerButton.addEventListener('click', showAnswer);
+        document.body.appendChild(answerButton);
+    }
+    function showAnswer(){
+        
     }
 
 
